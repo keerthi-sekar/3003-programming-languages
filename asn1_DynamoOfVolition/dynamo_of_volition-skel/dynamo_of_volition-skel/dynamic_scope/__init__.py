@@ -22,7 +22,7 @@ def get_dynamic_re() -> DynamicScope:
         print (flist)
 
         #HELP as of 9/18: returnDictionary correct implementation for function ...?
-        #HELP as of 9/18: Line 33 - str(value) == str(freevars[0]) comparison not working
+        #HELP as of 9/18: Line 29 - str(value) == str(freevars[0]) comparison not working
 
         for key, value in flv.items():
             if len(freevars) !=0 and str(value) == str(freevars[0]):
