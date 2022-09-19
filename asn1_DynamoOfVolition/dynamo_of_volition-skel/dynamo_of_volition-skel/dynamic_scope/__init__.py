@@ -8,23 +8,32 @@ import inspect
 class DynamicScope(abc.Mapping):
     def __init__(self):
         self.env: Dict[str, Optional[Any]] = {}
-        self.keys()
-        self.values()
 
-
-    """ def __contains__(self, __o: object) -> bool:
-        if(super().__contains__(__o) == True):
-            return super().__contains__(__o)
-        else:
-            return NameError
-
-    def keys(self) -> KeysView[_KT]:
-        return super().keys()
-
-    def values(self) -> ValuesView[_VT_co]:
-        return super().values()  """
 
 def get_dynamic_re() -> DynamicScope:
-    data = DynamicScope()
-    (data, inspect.stack())
-    return data
+    print(f"{'       --> Entering  DynamicScope.get_dynamic_re Method'}")
+    tuple_var = inspect.stack()
+    returnDictionary = dict()
+
+    for f in tuple_var:
+        flv= f.frame.f_back.f_locals
+        freevars = f.frame.f_code.co_freevars
+        flist = list (freevars)
+        print (flist)
+
+        #HELP as of 9/18: returnDictionary correct implementation for function ...?
+        #HELP as of 9/18: Line 33 - str(value) == str(freevars[0]) comparison not working
+
+        for key, value in flv.items():
+            if len(freevars) !=0 and str(value) == str(freevars[0]):
+                print(key, freevars[0], value, 'true- REMOVE ME ')
+            else:
+                print(key, value, 'false')   
+                returnDictionary.update({key: value})
+                
+
+       # if freevars in flv:
+            #returnList= flist
+    #print(f"{'   -->    --> within get_dynamic_re'}")
+    #return None
+    return returnDictionary
